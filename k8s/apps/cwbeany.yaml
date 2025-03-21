@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/your-name/my-django-app-infra.git
+    repoURL: https://github.com/cwadven/cwbeany-app-infra.git
     targetRevision: main
     path: k8s/base
   destination:
