@@ -1,0 +1,8 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - deployment.yaml
+  - service.yaml
+  - pvc.yaml
+  # secret.yaml은 .gitignore에 있으므로 로컬에서만 수동으로 적용 

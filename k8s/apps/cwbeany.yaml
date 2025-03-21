@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/cwadven/cwbeany-app-infra.git
-    targetRevision: main
+    targetRevision: master
     path: k8s/base
   destination:
     server: https://kubernetes.default.svc
