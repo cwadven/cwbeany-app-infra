@@ -15,11 +15,17 @@ spec:
       containers:
         - name: mysql-exporter
           image: prom/mysqld-exporter:latest
+          args:
+            - "--collect.info_schema.tables"
+            - "--collect.info_schema.innodb_metrics"
+            - "--collect.global_status"
+            - "--collect.global_variables"
+            - "--collect.slave_status"
           ports:
             - containerPort: 9104
           env:
             - name: DATA_SOURCE_NAME
               valueFrom:
                 secretKeyRef:
-                  name: mysql-secret
-                  key: MYSQL_EXPORTER_CONNECTION_STRING
+                  name: mysql-exporter-secret
+                  key: DATA_SOURCE_NAME

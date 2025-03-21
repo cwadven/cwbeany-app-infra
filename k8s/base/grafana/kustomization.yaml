@@ -6,6 +6,8 @@ resources:
   - service.yaml
   - configmap.yaml
   - pvc.yaml
+  - dashboard-json-configmap.yaml
+  - datasource-configmap.yaml
 
 configMapGenerator:
   - name: grafana-dashboards
