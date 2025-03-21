@@ -10,6 +10,5 @@ resources:
 configMapGenerator:
   - name: grafana-dashboards
     files:
-      - dashboard-json/node-exporter.json
-      - dashboard-json/mysql.json
-      - dashboard-json/redis.json 
+      - dashboard-json/mysql-overview.json
+      - dashboard-json/redis-overview.json 
