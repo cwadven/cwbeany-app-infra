@@ -7,4 +7,5 @@ resources:
   - ingress.yaml
   - configmap.yaml
   - pvc.yaml
+  - static-pvc.yaml
   # secret.yaml은 .gitignore에 있으므로 로컬에서만 수동으로 적용 
