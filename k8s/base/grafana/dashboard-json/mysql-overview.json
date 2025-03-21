@@ -1,0 +1,33 @@
+{
+  "annotations": {
+    "list": []
+  },
+  "panels": [
+    {
+      "datasource": "Prometheus",
+      "title": "MySQL Connections",
+      "type": "graph",
+      "targets": [
+        {
+          "expr": "mysql_global_status_threads_connected",
+          "legendFormat": "Connections"
+        }
+      ]
+    },
+    {
+      "datasource": "Prometheus",
+      "title": "MySQL QPS (Queries per Second)",
+      "type": "graph",
+      "targets": [
+        {
+          "expr": "rate(mysql_global_status_questions[1m])",
+          "legendFormat": "QPS"
+        }
+      ]
+    }
+  ],
+  "schemaVersion": 16,
+  "title": "MySQL Overview",
+  "uid": "mysql-overview",
+  "version": 1
+}

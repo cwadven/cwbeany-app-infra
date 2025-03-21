@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grafana
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grafana
+  template:
+    metadata:
+      labels:
+        app: grafana
+    spec:
+      containers:
+        - name: grafana
+          image: grafana/grafana:latest
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: grafana-config
+          volumeMounts:
+            - name: grafana-storage
+              mountPath: /var/lib/grafana
+            - name: provisioning-dashboards
+              mountPath: /etc/grafana/provisioning/dashboards/json
+            - name: provisioning-datasources
+              mountPath: /etc/grafana/provisioning/datasources
+      volumes:
+        - name: grafana-storage
+          persistentVolumeClaim:
+            claimName: grafana-pvc
+        - name: provisioning-dashboards
+          configMap:
+            name: grafana-dashboard-json
+        - name: provisioning-datasources
+          configMap:
+            name: grafana-provisioning-datasource

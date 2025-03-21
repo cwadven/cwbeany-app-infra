@@ -1,0 +1,33 @@
+{
+  "annotations": {
+    "list": []
+  },
+  "panels": [
+    {
+      "datasource": "Prometheus",
+      "title": "Redis Memory Usage",
+      "type": "graph",
+      "targets": [
+        {
+          "expr": "redis_memory_used_bytes",
+          "legendFormat": "Used Memory"
+        }
+      ]
+    },
+    {
+      "datasource": "Prometheus",
+      "title": "Connected Clients",
+      "type": "graph",
+      "targets": [
+        {
+          "expr": "redis_connected_clients",
+          "legendFormat": "Clients"
+        }
+      ]
+    }
+  ],
+  "schemaVersion": 16,
+  "title": "Redis Overview",
+  "uid": "redis-overview",
+  "version": 1
+}
