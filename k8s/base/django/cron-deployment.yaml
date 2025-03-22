@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django-cron
+  labels:
+    app: django-cron
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: django-cron
+  template:
+    metadata:
+      labels:
+        app: django-cron
+    spec:
+      containers:
+        - name: django-cron
+          image: beany258/django:1.0.3
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              apt-get update && apt-get install -y cron
+              
+              # 로그 디렉토리 생성
+              mkdir -p ${CRON_LOG_DIR}
+              
+              # crontab 설정
+              cd /app && python manage.py crontab add
+              
+              # cron 서비스 시작
+              service cron start
+              echo "CRON service started with log dir: ${CRON_LOG_DIR}"
+              
+              # Keep container running
+              tail -f /dev/null
+          envFrom:
+            - configMapRef:
+                name: django-config
+            - secretRef:
+                name: django-secret
+          volumeMounts:
+            - name: media
+              mountPath: /app/media
+            - name: logs
+              mountPath: /app/logs
+            - name: google-service-account
+              mountPath: /app/secrets
+              readOnly: true
+      volumes:
+        - name: media
+          persistentVolumeClaim:
+            claimName: django-media-pvc
+        - name: logs
+          emptyDir: {}
+        - name: google-service-account
+          secret:
+            secretName: google-service-account 

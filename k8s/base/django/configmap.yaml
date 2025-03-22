@@ -3,8 +3,8 @@ kind: ConfigMap
 metadata:
   name: django-config
 data:
-  DJANGO_DEBUG: "False"
-  DJANGO_ALLOWED_HOSTS: "myapp.local,localhost"
+  DJANGO_DEBUG: "True"
+  DJANGO_ALLOWED_HOSTS: "myapp.local,localhost,cwbeany.com"
   DB_HOST: "mysql"
   DB_PORT: "3306"
   DB_ENGINE: "django.db.backends.mysql"
@@ -16,3 +16,4 @@ data:
   SERVER_ENV: "K8s"
   ELASTICSEARCH_HOST: "elasticsearch"
   ELASTICSEARCH_PORT: "9200"
+  CRON_LOG_DIR: "/app/logs"
