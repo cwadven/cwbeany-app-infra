@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: django-cron
-          image: beany258/django:1.0.10
+          image: beany258/django:1.0.11
           command: ["/bin/sh", "-c"]
           args:
             - |
@@ -53,7 +53,7 @@ spec:
               dos2unix command.cron
               chmod 0644 command.cron
               cat command.cron | crontab -
-              service cron start
+              service cron restart
               # Cron 된 내용 확인
               echo "Cron 된 내용 확인"
               echo "--------------------------------"
