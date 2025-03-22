@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: django-cron
-          image: beany258/django:1.0.11
+          image: beany258/django:1.0.12
           command: ["/bin/sh", "-c"]
           args:
             - |
@@ -53,12 +53,32 @@ spec:
               dos2unix command.cron
               chmod 0644 command.cron
               cat command.cron | crontab -
+              
+              # rsyslog 설치 및 설정
+              apt-get install -y rsyslog
+              
+              # cron 로깅 활성화
+              echo "cron.*                          ${CRON_LOG_DIR}/cron.log" > /etc/rsyslog.d/cron.conf
+              
+              # cron 디버깅 모드 활성화
+              echo 'EXTRA_OPTS="-L 2"' >> /etc/default/cron
+              
+              # rsyslog 및 cron 서비스 재시작
+              service rsyslog restart
               service cron restart
+              
+              # 로그 파일 권한 설정
+              touch ${CRON_LOG_DIR}/cron.log
+              chmod 666 ${CRON_LOG_DIR}/cron.log
+              
               # Cron 된 내용 확인
               echo "Cron 된 내용 확인"
               echo "--------------------------------"
               crontab -l
               echo "--------------------------------"
+              crontab -l > ${CRON_LOG_DIR}/current_crontab.txt
+              
+              echo "Cron 로깅이 활성화되었습니다. 로그는 ${CRON_LOG_DIR}/cron.log에서 확인할 수 있습니다."
 
               # Keep container running
               tail -f /dev/null
