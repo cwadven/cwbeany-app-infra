@@ -21,6 +21,7 @@ spec:
           args:
             - |
               apt-get update && apt-get install -y cron
+              service cron start
               
               # 로그 디렉토리 생성
               mkdir -p ${CRON_LOG_DIR}
@@ -29,7 +30,6 @@ spec:
               cd /app && python manage.py crontab add
               
               # cron 서비스 시작
-              service cron start
               echo "CRON service started with log dir: ${CRON_LOG_DIR}"
               
               # Keep container running
