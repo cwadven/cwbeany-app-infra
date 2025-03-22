@@ -6,14 +6,27 @@ data:
   nginx.conf: |
     events {}
     http {
+      include       /etc/nginx/mime.types;
+      default_type  application/octet-stream;
+
       server {
         listen 80;
+        
+        # Static files config
         location /static/ {
           alias /usr/share/nginx/html/static/;
+          expires 30d;
+          add_header Cache-Control "public, max-age=2592000";
+          access_log off;
         }
+        
         location /media/ {
           alias /usr/share/nginx/html/media/;
+          expires 30d;
+          add_header Cache-Control "public, max-age=2592000";
+          access_log off;
         }
+        
         location / {
           proxy_pass http://django:8000;
           proxy_set_header Host $host;
