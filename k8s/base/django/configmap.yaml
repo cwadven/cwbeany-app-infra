@@ -17,4 +17,4 @@ data:
   ELASTICSEARCH_HOST: "elasticsearch"
   ELASTICSEARCH_PORT: "9200"
   CRON_LOG_DIR: "/app/logs"
-  CRON_TAB_SOURCE_SCRIPT: "/tmp/env.sh "
+  BACKUP_PATH: "/tmp/backup"

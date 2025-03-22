@@ -22,31 +22,29 @@ spec:
             - |
               apt-get update && apt-get install -y cron
               apt-get install -y vim
-              service cron start
+              apt-get install -y dos2unix
 
               # 로그 디렉토리 생성
               mkdir -p ${CRON_LOG_DIR}
 
               # 생성된 디렉토리에 만들어질 파일의 권한 변경
               chmod -R 777 ${CRON_LOG_DIR}
+
+              # 백업 디렉토리 생성
+              mkdir -p ${BACKUP_PATH}
+
+              # 백업 디렉토리에 만들어질 파일의 권한 변경
+              chmod -R 777 ${BACKUP_PATH}
               
-              # 환경 변수를 env.sh 파일로 내보내기
-              env > /tmp/env.sh
-              chmod +x /tmp/env.sh
-              
-              cd /app && python manage.py crontab add
-              echo "[$(date)] 새 crontab 설정을 추가했습니다." >> ${CRON_LOG_DIR}/cron_setup.log
-              
-              # 현재 crontab 내용 저장
-              crontab -l > ${CRON_LOG_DIR}/current_crontab.txt
-              
-              # cron 서비스 재시작
-              service cron restart
-              echo "[$(date)] cron 서비스를 재시작했습니다." >> ${CRON_LOG_DIR}/cron_setup.log
-              
-              # cron 서비스 시작 메시지 표시
-              echo "CRON service started with log dir: ${CRON_LOG_DIR}"
-              echo "[$(date)] cron 서비스가 시작되었습니다. 로그 디렉토리: ${CRON_LOG_DIR}" >> ${CRON_LOG_DIR}/cron_setup.log
+              dos2unix command.cron
+              chmod 0644 command.cron
+              cat command.cron | crontab -
+              service cron start
+              # Cron 된 내용 확인
+              echo "Cron 된 내용 확인"
+              echo "--------------------------------"
+              crontab -l
+              echo "--------------------------------"
 
               # Keep container running
               tail -f /dev/null
