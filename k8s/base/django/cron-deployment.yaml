@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: django-cron
-          image: beany258/django:1.0.7
+          image: beany258/django:1.0.8
           command: ["/bin/sh", "-c"]
           args:
             - |
