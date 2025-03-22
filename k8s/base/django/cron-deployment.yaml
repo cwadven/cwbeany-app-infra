@@ -20,6 +20,8 @@ spec:
           command: ["/bin/sh", "-c"]
           args:
             - |
+              chmod -R 777 /app
+
               apt-get update && apt-get install -y cron
               service cron start
               
@@ -31,9 +33,6 @@ spec:
               
               # cron 서비스 시작
               echo "CRON service started with log dir: ${CRON_LOG_DIR}"
-              
-              # Keep container running
-              tail -f /dev/null
           envFrom:
             - configMapRef:
                 name: django-config
