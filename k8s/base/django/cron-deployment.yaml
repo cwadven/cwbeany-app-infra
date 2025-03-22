@@ -36,10 +36,18 @@ spec:
               # 백업 디렉토리에 만들어질 파일의 권한 변경
               chmod -R 777 ${BACKUP_PATH}
 
-              # env sh 파일 생성
-              env > /tmp/env.sh
-              # env sh 파일 권한 변경
-              chmod 0644 /tmp/env.sh
+              # 환경 변수를 안전하게 처리하는 env.sh 파일 생성
+              echo '#!/bin/bash' > /tmp/env.sh
+              env | while read -r line; do
+                # 특수 문자를 이스케이프하여 처리
+                var_name=$(echo "$line" | cut -d= -f1)
+                var_value=$(echo "$line" | cut -d= -f2-)
+                echo "export $var_name=\"$var_value\"" >> /tmp/env.sh
+              done
+
+              # env.sh 파일 권한 변경 및 유닉스 형식으로 변환
+              chmod 0755 /tmp/env.sh
+              dos2unix /tmp/env.sh
 
               # command.cron 파일 생성
               dos2unix command.cron
