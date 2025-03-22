@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: django-cron
-          image: beany258/django:1.0.9
+          image: beany258/django:1.0.10
           command: ["/bin/sh", "-c"]
           args:
             - |
@@ -35,7 +35,13 @@ spec:
 
               # 백업 디렉토리에 만들어질 파일의 권한 변경
               chmod -R 777 ${BACKUP_PATH}
-              
+
+              # env sh 파일 생성
+              env > /tmp/env.sh
+              # env sh 파일 권한 변경
+              chmod 0644 /tmp/env.sh
+
+              # command.cron 파일 생성
               dos2unix command.cron
               chmod 0644 command.cron
               cat command.cron | crontab -
