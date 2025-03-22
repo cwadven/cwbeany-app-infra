@@ -2,3 +2,7 @@ secret.yaml
 .idea
 .venv
 google-service-account-secret.yaml
+
+# 민감한 쿠버네티스 Secret 파일
+k8s/base/django/secret.yaml
+k8s/base/django/google-service-account-secret.yaml

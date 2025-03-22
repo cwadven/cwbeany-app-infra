@@ -8,5 +8,6 @@ resources:
   - configmap.yaml
   - pvc.yaml
   - static-pvc.yaml
-  - google-service-account-secret.yaml
-  - secret.yaml
+  # Secret 파일은 Git에 저장하지 않고 직접 적용
+  # - google-service-account-secret.yaml
+  # - secret.yaml
