@@ -13,7 +13,7 @@ data:
   DB_USER: "blog"
   REDIS_PORT: "6379"
   REDIS_DB: "0"
-  SERVER_ENV: "K8s"
+  SERVER_ENV: "k8s"
   ELASTICSEARCH_HOST: "elasticsearch"
   ELASTICSEARCH_PORT: "9200"
   CRON_LOG_DIR: "/app/logs"
