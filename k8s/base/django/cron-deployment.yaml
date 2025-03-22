@@ -21,10 +21,14 @@ spec:
           args:
             - |
               apt-get update && apt-get install -y cron
+              # vi 설치
+              apt-get install -y vim
               service cron start
-              
+
               # 로그 디렉토리 생성
               mkdir -p ${CRON_LOG_DIR}
+
+              # 생성된 디렉토리에 만들어질 파일의 권한 변경
               chmod -R 777 ${CRON_LOG_DIR}
               
               # crontab 설정
