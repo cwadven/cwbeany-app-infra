@@ -16,12 +16,11 @@ spec:
     spec:
       containers:
         - name: django-cron
-          image: beany258/django:1.0.6
+          image: beany258/django:1.0.7
           command: ["/bin/sh", "-c"]
           args:
             - |
               apt-get update && apt-get install -y cron
-              # vi 설치
               apt-get install -y vim
               service cron start
 
