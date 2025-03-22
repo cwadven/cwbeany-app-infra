@@ -30,10 +30,21 @@ spec:
               # 생성된 디렉토리에 만들어질 파일의 권한 변경
               chmod -R 777 ${CRON_LOG_DIR}
               
+              # 환경 변수를 env.sh 파일로 내보내기
+              env > /tmp/env.sh
+              echo 'source /tmp/env.sh' > /etc/cron.d/env.sh
+              chmod +x /etc/cron.d/env.sh
+              
+              # /etc/default/cron에 환경 파일 설정 추가
+              echo "CRON_ENV_FILE=/etc/cron.d/env.sh" >> /etc/default/cron
+              
               # crontab 설정
               cd /app && python manage.py crontab add
               
-              # cron 서비스 시작
+              # cron 서비스 재시작
+              service cron restart
+              
+              # cron 서비스 시작 메시지 표시
               echo "CRON service started with log dir: ${CRON_LOG_DIR}"
 
               # Keep container running
