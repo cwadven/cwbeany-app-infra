@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: django
-          image: beany258/django:1.0.5
+          image: beany258/django:1.0.6
           ports:
             - containerPort: 8000
           envFrom:
