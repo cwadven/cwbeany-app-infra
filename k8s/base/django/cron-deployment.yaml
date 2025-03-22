@@ -33,6 +33,9 @@ spec:
               
               # cron 서비스 시작
               echo "CRON service started with log dir: ${CRON_LOG_DIR}"
+
+              # Keep container running
+              tail -f /dev/null
           envFrom:
             - configMapRef:
                 name: django-config
