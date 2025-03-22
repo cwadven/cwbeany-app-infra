@@ -20,13 +20,12 @@ spec:
           command: ["/bin/sh", "-c"]
           args:
             - |
-              chmod -R 777 /app
-
               apt-get update && apt-get install -y cron
               service cron start
               
               # 로그 디렉토리 생성
               mkdir -p ${CRON_LOG_DIR}
+              chmod -R 777 ${CRON_LOG_DIR}
               
               # crontab 설정
               cd /app && python manage.py crontab add
