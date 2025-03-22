@@ -27,7 +27,13 @@ spec:
           volumeMounts:
             - name: media
               mountPath: /app/media
+            - name: google-service-account
+              mountPath: /app/secrets
+              readOnly: true
       volumes:
         - name: media
           persistentVolumeClaim:
             claimName: django-media-pvc
+        - name: google-service-account
+          secret:
+            secretName: google-service-account

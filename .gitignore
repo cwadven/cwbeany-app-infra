@@ -1,3 +1,4 @@
 secret.yaml
 .idea
 .venv
+google-service-account-secret.yaml
