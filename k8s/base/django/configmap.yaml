@@ -4,7 +4,7 @@ metadata:
   name: django-config
 data:
   DJANGO_DEBUG: "False"
-  DJANGO_ALLOWED_HOSTS: "myapp.local"
+  DJANGO_ALLOWED_HOSTS: "myapp.local,localhost"
   DB_HOST: "mysql"
   DB_PORT: "3306"
   DB_ENGINE: "django.db.backends.mysql"
