@@ -15,4 +15,7 @@ kubectl apply -f k8s/base/mysql/secret.yaml -n $NAMESPACE
 # MySQL-Exporter 비밀번호 Secret 적용
 kubectl apply -f k8s/base/mysqld-exporter/secret.yaml -n $NAMESPACE
 
+# Elasticsearch Secret 적용
+kubectl apply -f k8s/base/elasticsearch/secret.yaml -n $NAMESPACE
+
 echo "Secrets applied successfully to namespace $NAMESPACE" 

@@ -16,5 +16,8 @@ data:
   SERVER_ENV: "k8s"
   ELASTICSEARCH_HOST: "elasticsearch"
   ELASTICSEARCH_PORT: "9200"
+  ELASTICSEARCH_USERNAME: "elastic"
+  ELASTICSEARCH_PASSWORD: "changeme"
+  ELASTICSEARCH_USE_SSL: "false"
   CRON_LOG_DIR: "/app/logs"
   BACKUP_PATH: "/tmp/backup"
