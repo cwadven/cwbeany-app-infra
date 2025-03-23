@@ -6,10 +6,16 @@ data:
   nginx.conf: |
     events {}
     http {
+      include       /etc/nginx/mime.types;
+      default_type  application/octet-stream;
       server {
         listen 80;
         location /static/ {
           alias /usr/share/nginx/html/static/;
+          autoindex on;
+          add_header Cache-Control "public, max-age=31536000";
+          add_header Access-Control-Allow-Origin *;
+          try_files $uri $uri/ =404;
         }
         location /media/ {
           alias /usr/share/nginx/html/media/;

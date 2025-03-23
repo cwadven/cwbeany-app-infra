@@ -58,6 +58,10 @@ kubectl -n cwbeany get secret argocd-initial-admin-secret -o jsonpath="{.data.pa
 
 kubectl get pods -n cwbeany -l app=django
 
+## Get inside to pod
+
+kubectl exec -it django-cron-66f79cd876-69tgs -n cwbeany -- bash
+
 ## Grafana Login
 
 http://localhost:30301/
