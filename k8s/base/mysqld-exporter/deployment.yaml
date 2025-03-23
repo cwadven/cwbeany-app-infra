@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: mysqld-exporter
-          image: prom/mysqld-exporter:latest
+          image: prom/mysqld-exporter:v0.14.0
           args:
             - "--collect.info_schema.tables"
             - "--collect.info_schema.innodb_metrics"
