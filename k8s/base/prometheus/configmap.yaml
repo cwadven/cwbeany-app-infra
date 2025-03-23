@@ -13,6 +13,6 @@ data:
       - job_name: 'redis'
         static_configs:
           - targets: ['redis-exporter:9121']
-      - job_name: 'mysql'
+      - job_name: 'mysqld'
         static_configs:
-          - targets: ['mysql-exporter:9104']
+          - targets: ['mysqld-exporter:9104']

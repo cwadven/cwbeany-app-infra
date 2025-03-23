@@ -23,9 +23,12 @@ spec:
             - "--collect.slave_status"
           ports:
             - containerPort: 9104
-          envFrom:
-            - secretRef:
-                name: mysqld-exporter-secret
+          env:
+            - name: MYSQL_EXPORTER_CONNECTION_STRING
+              valueFrom:
+                  secretKeyRef:
+                    name: mysqld-exporter-secret
+                    key: MYSQL_EXPORTER_CONNECTION_STRING
           volumeMounts:
             - name: config
               mountPath: /config
