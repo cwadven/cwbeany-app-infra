@@ -49,6 +49,9 @@ spec:
               chmod 0755 /tmp/env.sh
               dos2unix /tmp/env.sh
 
+              # Migrate
+              python manage.py migrate --noinput
+
               # command.cron 파일 생성
               dos2unix command.cron
               chmod 0644 command.cron
