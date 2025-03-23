@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: django
+  name: celery-beat
   labels:
-    app: django
+    app: celery-beat
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: django
+      app: celery-beat
   template:
     metadata:
       labels:
-        app: django
+        app: celery-beat
     spec:
       containers:
-        - name: django
+        - name: celery-beat
           image: beany258/django:1.0.16
-          ports:
-            - containerPort: 8000
+          command: ["/bin/sh", "-c"]
+          args: ["cd /app && celery -A cwbeany beat -l info"]
           envFrom:
             - configMapRef:
                 name: django-config
@@ -32,10 +32,6 @@ spec:
             - name: google-service-account
               mountPath: /app/secrets
               readOnly: true
-          lifecycle:
-            postStart:
-              exec:
-                command: ["/bin/sh", "-c", "cd /app && python manage.py collectstatic --noinput"]
       volumes:
         - name: media
           persistentVolumeClaim:
@@ -45,4 +41,4 @@ spec:
             claimName: django-static-pvc
         - name: google-service-account
           secret:
-            secretName: google-service-account
+            secretName: google-service-account 

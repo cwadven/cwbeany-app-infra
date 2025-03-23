@@ -4,11 +4,13 @@ kind: Kustomization
 resources:
   - deployment.yaml
   - cron-deployment.yaml
+  - celery-deployment.yaml
+  - celery-beat-deployment.yaml
   - service.yaml
   - ingress.yaml
   - configmap.yaml
   - pvc.yaml
   - static-pvc.yaml
   # Secret 파일은 Git에 저장하지 않고 직접 적용
-  # - google-service-account-secret.yaml
   # - secret.yaml
+  # - google-service-account-secret.yaml
