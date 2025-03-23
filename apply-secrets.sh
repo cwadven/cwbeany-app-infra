@@ -13,6 +13,6 @@ kubectl apply -f k8s/base/django/google-service-account-secret.yaml -n $NAMESPAC
 kubectl apply -f k8s/base/mysql/secret.yaml -n $NAMESPACE
 
 # MySQL-Exporter 비밀번호 Secret 적용
-kubectl apply -f k8s/base/mysql-exporter/secret.yaml -n $NAMESPACE
+kubectl apply -f k8s/base/mysqld-exporter/secret.yaml -n $NAMESPACE
 
 echo "Secrets applied successfully to namespace $NAMESPACE" 

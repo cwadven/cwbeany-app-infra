@@ -9,5 +9,5 @@ resources:
   - elasticsearch
   - grafana
   - prometheus
-  - mysql-exporter
+  - mysqld-exporter
   - redis-exporter

@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysqld-exporter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysqld-exporter
+  template:
+    metadata:
+      labels:
+        app: mysqld-exporter
+    spec:
+      containers:
+        - name: mysqld-exporter
+          image: prom/mysqld-exporter:latest
+          args:
+            - "--collect.info_schema.tables"
+            - "--collect.info_schema.innodb_metrics"
+            - "--collect.global_status"
+            - "--collect.global_variables"
+            - "--collect.slave_status"
+          ports:
+            - containerPort: 9104
+          envFrom:
+            - secretRef:
+                name: mysqld-exporter-secret
+          volumeMounts:
+            - name: config
+              mountPath: /config
+          readinessProbe:
+            httpGet:
+              path: /metrics
+              port: 9104
+            initialDelaySeconds: 10
+            periodSeconds: 10
+      volumes:
+        - name: config
+          emptyDir: {}
