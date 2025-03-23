@@ -24,11 +24,11 @@ spec:
           ports:
             - containerPort: 9104
           env:
-            - name: MYSQL_EXPORTER_CONNECTION_STRING
+            - name: DATA_SOURCE_NAME
               valueFrom:
-                  secretKeyRef:
-                    name: mysqld-exporter-secret
-                    key: MYSQL_EXPORTER_CONNECTION_STRING
+                secretKeyRef:
+                  name: mysqld-exporter-secret
+                  key: DATA_SOURCE_NAME
           volumeMounts:
             - name: config
               mountPath: /config
