@@ -18,7 +18,7 @@ spec:
         - name: celery-beat
           image: beany258/django:1.0.17
           command: ["/bin/sh", "-c"]
-          args: ["cd /app && celery -A cwbeany beat -l info"]
+          args: ["cd /app && celery -A config beat -l info"]
           envFrom:
             - configMapRef:
                 name: django-config
