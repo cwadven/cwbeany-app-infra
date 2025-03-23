@@ -50,3 +50,14 @@ https://localhost:30999/
 Password Getting
 
 kubectl -n cwbeany get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | ForEach-Object { [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($_)) }
+
+
+# Extra
+
+## How to now Pod info
+
+kubectl get pods -n cwbeany -l app=django
+
+## Grafana Login
+
+http://localhost:30301/
