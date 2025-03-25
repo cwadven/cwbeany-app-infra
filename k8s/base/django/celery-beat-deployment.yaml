@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: celery-beat
-          image: beany258/django:1.0.18
+          image: beany258/django:1.0.19
           command: ["/bin/sh", "-c"]
           args: ["cd /app && celery -A config beat -l info"]
           envFrom:
