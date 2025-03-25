@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: celery
-          image: beany258/django:1.0.17
+          image: beany258/django:1.0.18
           command: ["/bin/sh", "-c"]
           args: ["cd /app && celery -A config worker -l info"]
           envFrom:
