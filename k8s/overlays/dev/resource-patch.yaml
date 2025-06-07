@@ -16,6 +16,8 @@ spec:
             memory: "512Mi"
             cpu: "500m"
         envFrom:
+        - configMapRef:
+            name: django-config
         - secretRef:
             name: redis-secret
       volumes:
