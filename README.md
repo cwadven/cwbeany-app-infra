@@ -5,6 +5,7 @@
 ```bash
 kubectl create namespace cwbeany
 kubectl create namespace argocd
+kubectl create namespace argo-rollouts
 ```
 
 ## 2. Set argocd
@@ -16,7 +17,13 @@ kubectl apply -f k8s/argocd-rbac.yaml
 kubectl apply -f k8s/apps/cwbeany.yaml -n argocd
 ```
 
-## 3. Set Application
+## 3. Set argocd rollouts
+
+```bash
+kubectl apply -n argo-rollouts -f https://github.com/argoproj/argo-rollouts/releases/latest/download/install.yaml
+```
+
+## 4. Set Application
 
 ```bash
 kubectl apply -k k8s/base -n cwbeany
