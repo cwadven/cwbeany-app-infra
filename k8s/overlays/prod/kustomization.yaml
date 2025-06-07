@@ -1,0 +1,26 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: cwbeany-prod
+namePrefix: prod-
+
+resources:
+  - ../../base/django
+  - ../../base/mysql
+  - ../../base/redis
+  - ../../base/nginx
+  - ../../base/elasticsearch
+  - ../../base/grafana
+  - ../../base/prometheus
+  - ../../base/mysqld-exporter
+  - ../../base/redis-exporter
+
+patches:
+  - path: resource-patch.yaml
+
+configMapGenerator:
+  - name: django-config
+    behavior: merge
+    literals:
+      - DJANGO_DEBUG=False
+      - ENVIRONMENT=production

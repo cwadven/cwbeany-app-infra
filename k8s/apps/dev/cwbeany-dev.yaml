@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cwbeany-dev
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/cwadven/cwbeany-app-infra.git
+    targetRevision: development
+    path: k8s/overlays/dev
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: cwbeany-dev
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
