@@ -1,22 +1,11 @@
 apiVersion: apps/v1
-kind: Rollout
+kind: Deployment
 metadata:
   name: django
   labels:
     app: django
 spec:
   replicas: 2
-  strategy:
-    canary:
-      steps:
-      - setWeight: 20
-      - pause: {}
-      - setWeight: 40
-      - pause: {duration: 10}
-      - setWeight: 60
-      - pause: {duration: 10}
-      - setWeight: 80
-      - pause: {duration: 10}
   selector:
     matchLabels:
       app: django

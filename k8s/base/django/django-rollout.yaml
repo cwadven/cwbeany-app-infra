@@ -1,0 +1,77 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: django
+  namespace: default
+spec:
+  replicas: 3
+  strategy:
+    canary:
+      steps:
+      - setWeight: 20
+      - pause: {duration: 30s}
+      - setWeight: 40
+      - pause: {duration: 30s}
+      - setWeight: 60
+      - pause: {duration: 30s}
+      - setWeight: 80
+      - pause: {duration: 30s}
+  selector:
+    matchLabels:
+      app: django
+  template:
+    metadata:
+      labels:
+        app: django
+    spec:
+      containers:
+      - name: django
+        image: beany258/django:1.0.20
+        ports:
+        - containerPort: 8000
+        envFrom:
+        - configMapRef:
+            name: django-config
+        - secretRef:
+            name: django-secret
+        volumeMounts:
+        - name: media
+          mountPath: /app/media
+        - name: static
+          mountPath: /app/static
+        - name: google-service-account
+          mountPath: /app/secrets
+          readOnly: true
+        lifecycle:
+          postStart:
+            exec:
+              command: ["/bin/sh", "-c", "cd /app && python manage.py collectstatic --noinput"]
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8000
+          initialDelaySeconds: 15
+          periodSeconds: 20
+      volumes:
+      - name: media
+        persistentVolumeClaim:
+          claimName: django-media-pvc
+      - name: static
+        persistentVolumeClaim:
+          claimName: django-static-pvc
+      - name: google-service-account
+        secret:
+          secretName: google-service-account
