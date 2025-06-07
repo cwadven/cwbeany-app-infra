@@ -7,6 +7,7 @@ spec:
     spec:
       containers:
       - name: django
+        image: beany258/django:1.0.21
         resources:
           requests:
             memory: "1Gi"
