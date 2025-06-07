@@ -11,10 +11,23 @@ spec:
         resources:
           requests:
             memory: "512Mi"
-            cpu: "500m"
+            cpu: "400m"
           limits:
             memory: "1Gi"
-            cpu: "1000m"
+            cpu: "800m"
+        envFrom:
+        - secretRef:
+            name: redis-secret
+      volumes:
+      - name: media
+        persistentVolumeClaim:
+          claimName: staging-django-media-pvc
+      - name: static
+        persistentVolumeClaim:
+          claimName: staging-django-static-pvc
+      - name: google-service-account
+        secret:
+          secretName: google-service-account
   replicas: 2
 ---
 apiVersion: apps/v1
