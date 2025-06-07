@@ -26,5 +26,6 @@ configMapGenerator:
       - DJANGO_DEBUG=False
       - ENVIRONMENT=production
       - REDIS_HOST=prod-redis
+      - DB_HOST=prod-mysql
       - CELERY_BROKER_URL=redis://prod-redis:6379/1
       - CELERY_RESULT_BACKEND=redis://prod-redis:6379/1
