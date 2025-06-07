@@ -3,18 +3,13 @@ secret.yaml
 .venv
 google-service-account-secret.yaml
 
-# 민감한 쿠버네티스 Secret 파일
+# Base secrets (to be removed after migration)
 k8s/base/django/secret.yaml
 k8s/base/django/google-service-account-secret.yaml
+k8s/base/mysql/secret.yaml
+k8s/base/redis/secret.yaml
+k8s/base/elasticsearch/secret.yaml
 
 # Kubernetes secrets
-k8s/overlays/*/mysqld-exporter-secret.yaml
-k8s/overlays/*/mysql-secret.yaml
-k8s/overlays/*/redis-secret.yaml
-k8s/overlays/*/django-secret.yaml
-
-# Keep templates
-!k8s/overlays/*/mysqld-exporter-secret.yaml.template
-!k8s/overlays/*/mysql-secret.yaml.template
-!k8s/overlays/*/redis-secret.yaml.template
-!k8s/overlays/*/django-secret.yaml.template
+k8s/overlays/*/secret/*.yaml
+!k8s/overlays/*/secret/*.template

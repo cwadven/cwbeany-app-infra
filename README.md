@@ -31,27 +31,7 @@ kubectl apply -k k8s/overlays/{dev,staging,prod} -n cwbeany-{dev,staging,prod}
 
 ## 5. Set secrets
 
-You have to create secret.yaml file in each services
-
-```
-django/secret.yaml
-django/google-service-account-secret.yaml
-mysql/secret.yaml
-mysqld-exporter/secret.yaml
-elasticsearch/secret.yaml
-```
-
-Example
-```yaml
-apiVersion: v1
-kind: Secret
-metadata:
-  name: mysqld-exporter-secret
-  namespace: cwbeany
-type: Opaque
-stringData:
-  DATA_SOURCE_NAME: "user:userpassword@tcp(mysql:3306)/"
-```
+You have to create xxx-secret.yaml file in each overlays/{dev,staging,prod}/secret
 
 ## 6. Add secret from local
 
