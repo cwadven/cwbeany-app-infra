@@ -19,7 +19,7 @@ spec:
         - configMapRef:
             name: prod-django-config
         - secretRef:
-            name: redis-secret
+            name: django-secret
       volumes:
       - name: media
         persistentVolumeClaim:
@@ -157,15 +157,4 @@ spec:
             memory: "1Gi"
             cpu: "800m"
         ports:
-        - containerPort: 6379
-        command:
-        - redis-server
-        args:
-        - --requirepass
-        - $(REDIS_PASSWORD)
-        env:
-        - name: REDIS_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: redis-secret
-              key: REDIS_PASSWORD 
+        - containerPort: 6379 
