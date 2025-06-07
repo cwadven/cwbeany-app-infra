@@ -10,11 +10,16 @@ spec:
         image: beany258/django:1.0.21
         resources:
           requests:
-            memory: "256Mi"
+            memory: "512Mi"
             cpu: "250m"
           limits:
-            memory: "512Mi"
+            memory: "1Gi"
             cpu: "500m"
+        env:
+        - name: GUNICORN_TIMEOUT
+          value: "120"
+        - name: GUNICORN_WORKERS
+          value: "3"
         envFrom:
         - configMapRef:
             name: dev-django-config
