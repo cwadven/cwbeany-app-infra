@@ -48,11 +48,11 @@ spec:
               command: ["/bin/sh", "-c", "cd /app && python manage.py collectstatic --noinput"]
         resources:
           requests:
-            memory: "64Mi"
-            cpu: "250m"
-          limits:
-            memory: "128Mi"
+            memory: "1Gi"
             cpu: "500m"
+          limits:
+            memory: "2Gi"
+            cpu: "1000m"
         readinessProbe:
           httpGet:
             path: /

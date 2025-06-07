@@ -29,7 +29,7 @@ kubectl apply -n argo-rollouts -f https://github.com/argoproj/argo-rollouts/rele
 kubectl apply -k k8s/base -n cwbeany
 ```
 
-## 4. Set secrets
+## 5. Set secrets
 
 You have to create secret.yaml file in each services
 
@@ -53,13 +53,13 @@ stringData:
   DATA_SOURCE_NAME: "user:userpassword@tcp(mysql:3306)/"
 ```
 
-## 5. Add secret from local
+## 6. Add secret from local
 
 ```
 powershell -ExecutionPolicy Bypass -File .\apply-secrets.ps1
 ```
 
-## 6. ArgoCD Login
+## 7. ArgoCD Login
 
 https://localhost:30999/
 
@@ -94,6 +94,13 @@ docker push <dockerhub_username>/<repository_name>:<GENTERATED_TAG>
 k8s/base/django/xxxx-deployment.yaml file of containers `image:` should be change
 
 4. Go to argocd web and sync or wait
+
+## How to reapply kubectl
+
+```
+kubectl apply -k k8s/base
+```
+
 
 ## How to now Pod info
 
