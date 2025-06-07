@@ -45,7 +45,7 @@ spec:
         lifecycle:
           postStart:
             exec:
-              command: ["/bin/sh", "-c", "cd /app && python manage.py collectstatic --noinput"]
+              command: ["/bin/sh", "-c", "cd /app && python manage.py collectstatic --noinput && python manage.py migrate --noinput"]
         resources:
           requests:
             memory: "1Gi"
