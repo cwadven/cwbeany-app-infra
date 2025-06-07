@@ -14,6 +14,8 @@ resources:
   - ../../base/prometheus
   - ../../base/mysqld-exporter
   - ../../base/redis-exporter
+  # Secret files should be applied separately
+  # - mysqld-exporter-secret.yaml
 
 patches:
   - path: resource-patch.yaml

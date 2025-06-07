@@ -10,6 +10,9 @@ fi
 # 네임스페이스 설정
 NAMESPACE="$1"
 
+# NAMESPACE 에서 - 뒤에 있는 글자 가져오기
+ENVIRONMENT=$(echo $NAMESPACE | cut -d'-' -f2)
+
 echo "Applying secrets to namespace: $NAMESPACE"
 
 # Django 민감 정보 Secret 적용
@@ -22,7 +25,7 @@ kubectl apply -f k8s/base/django/google-service-account-secret.yaml -n $NAMESPAC
 kubectl apply -f k8s/base/mysql/secret.yaml -n $NAMESPACE
 
 # MySQL-Exporter 비밀번호 Secret 적용
-kubectl apply -f k8s/base/mysqld-exporter/secret.yaml -n $NAMESPACE
+kubectl apply -f k8s/overlays/$ENVIRONMENT/mysqld-exporter-secret.yaml -n $NAMESPACE
 
 # Elasticsearch Secret 적용
 kubectl apply -f k8s/base/elasticsearch/secret.yaml -n $NAMESPACE
