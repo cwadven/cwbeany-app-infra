@@ -1,5 +1,9 @@
-# 네임스페이스 설정
-$NAMESPACE = "cwbeany"
+param(
+    [Parameter(Mandatory=$true)]
+    [string]$NAMESPACE
+)
+
+Write-Host "Applying secrets to namespace: $NAMESPACE"
 
 # Django 민감 정보 Secret 적용
 kubectl apply -f k8s/base/django/secret.yaml -n $NAMESPACE

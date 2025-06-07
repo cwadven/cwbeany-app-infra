@@ -3,7 +3,7 @@
 ## 1. Create namespace for application & argocd
 
 ```bash
-kubectl create namespace cwbeany
+kubectl create namespace cwbeany-{dev,prod,staging}
 kubectl create namespace argocd
 kubectl create namespace argo-rollouts
 ```
@@ -14,7 +14,7 @@ kubectl create namespace argo-rollouts
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 kubectl apply -f k8s/argocd-nodeport.yaml
 kubectl apply -f k8s/argocd-rbac.yaml
-kubectl apply -f k8s/apps/cwbeany.yaml -n argocd
+kubectl apply -f k8s/apps/{dev,prod,staging}/cwbeany-{dev,prod,staging}.yaml -n argocd
 ```
 
 ## 3. Set argocd rollouts
@@ -26,7 +26,7 @@ kubectl apply -n argo-rollouts -f https://github.com/argoproj/argo-rollouts/rele
 ## 4. Set Application
 
 ```bash
-kubectl apply -k k8s/base -n cwbeany
+kubectl apply -k k8s/overlays/{dev,staging,prod} -n cwbeany-{dev,staging,prod}
 ```
 
 ## 5. Set secrets
@@ -56,7 +56,7 @@ stringData:
 ## 6. Add secret from local
 
 ```
-powershell -ExecutionPolicy Bypass -File .\apply-secrets.ps1
+powershell -ExecutionPolicy Bypass -File .\apply-secrets.ps1 -NAMESPACE cwbeany-{dev,staging,prod}
 ```
 
 ## 7. ArgoCD Login
@@ -122,7 +122,13 @@ http://localhost:30301/
 ## Delete namespace
 
 ```
-kubectl delete namespace cwbeany
+kubectl delete namespace cwbeany-{dev,staging,prod}
 kubectl delete namespace argocd
 kubectl delete namespace argo-rollouts
 ```
+
+## Each kubectl re apply
+
+kubectl apply -k k8s/overlays/{dev,staging,prod}
+
+kubectl rollout restart deployment dev-nginx -n cwbeany-dev

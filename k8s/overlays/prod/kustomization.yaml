@@ -17,6 +17,7 @@ resources:
 
 patches:
   - path: resource-patch.yaml
+  - path: nginx-config-patch.yaml
 
 configMapGenerator:
   - name: django-config

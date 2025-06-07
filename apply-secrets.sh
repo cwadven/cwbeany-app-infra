@@ -1,7 +1,16 @@
 #!/bin/bash
 
+# 파라미터 체크
+if [ -z "$1" ]; then
+    echo "Error: Namespace parameter is required"
+    echo "Usage: $0 <namespace>"
+    exit 1
+fi
+
 # 네임스페이스 설정
-NAMESPACE="cwbeany"
+NAMESPACE="$1"
+
+echo "Applying secrets to namespace: $NAMESPACE"
 
 # Django 민감 정보 Secret 적용
 kubectl apply -f k8s/base/django/secret.yaml -n $NAMESPACE
