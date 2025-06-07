@@ -117,3 +117,12 @@ kubectl exec -it django-cron-66f79cd876-69tgs -n cwbeany -- bash
 ## Grafana Login
 
 http://localhost:30301/
+
+
+## Delete namespace
+
+```
+kubectl delete namespace cwbeany
+kubectl delete namespace argocd
+kubectl delete namespace argo-rollouts
+```
