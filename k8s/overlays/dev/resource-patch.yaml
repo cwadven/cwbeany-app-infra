@@ -17,14 +17,27 @@ spec:
             cpu: "500m"
         env:
         - name: GUNICORN_TIMEOUT
-          value: "120"
+          value: "300"
         - name: GUNICORN_WORKERS
-          value: "3"
+          value: "2"
+        - name: GUNICORN_LOG_LEVEL
+          value: "debug"
+        - name: DJANGO_DEBUG
+          value: "True"
+        - name: PYTHONUNBUFFERED
+          value: "1"
         envFrom:
         - configMapRef:
             name: dev-django-config
         - secretRef:
             name: django-secret
+        command: ["/bin/sh", "-c"]
+        args:
+          - |
+            cd /app
+            python manage.py collectstatic --noinput
+            python manage.py migrate --noinput
+            gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers $GUNICORN_WORKERS --timeout $GUNICORN_TIMEOUT --log-level debug
       volumes:
       - name: media
         persistentVolumeClaim:
