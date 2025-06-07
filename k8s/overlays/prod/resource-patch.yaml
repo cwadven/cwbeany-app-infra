@@ -17,7 +17,7 @@ spec:
             cpu: "1600m"
         envFrom:
         - configMapRef:
-            name: django-config
+            name: prod-django-config
         - secretRef:
             name: redis-secret
       volumes:

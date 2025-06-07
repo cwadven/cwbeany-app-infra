@@ -17,7 +17,7 @@ spec:
             cpu: "800m"
         envFrom:
         - configMapRef:
-            name: django-config
+            name: staging-django-config
         - secretRef:
             name: redis-secret
       volumes:
