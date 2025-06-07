@@ -57,13 +57,13 @@ spec:
           httpGet:
             path: /
             port: 8000
-          initialDelaySeconds: 5
+          initialDelaySeconds: 30
           periodSeconds: 10
         livenessProbe:
           httpGet:
             path: /
             port: 8000
-          initialDelaySeconds: 15
+          initialDelaySeconds: 30
           periodSeconds: 20
       volumes:
       - name: media
