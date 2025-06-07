@@ -21,11 +21,18 @@ kind: Deployment
 metadata:
   name: nginx
 spec:
+  selector:
+    matchLabels:
+      app: nginx  
   replicas: 2
   template:
+    metadata:
+      labels:
+        app: nginx
     spec:
       containers:
       - name: nginx
+        image: nginx:1.25
         resources:
           requests:
             memory: "256Mi"
@@ -39,11 +46,18 @@ kind: Deployment
 metadata:
   name: elasticsearch
 spec:
+  selector:
+    matchLabels:
+      app: elasticsearch
   replicas: 2
   template:
+    metadata:
+      labels:
+        app: elasticsearch
     spec:
       containers:
       - name: elasticsearch
+        image: elasticsearch:8.8.0
         resources:
           requests:
             memory: "1Gi"
@@ -57,11 +71,18 @@ kind: Deployment
 metadata:
   name: grafana
 spec:
+  selector:
+    matchLabels:
+      app: grafana
   replicas: 1
   template:
+    metadata:
+      labels:
+        app: grafana
     spec:
       containers:
       - name: grafana
+        image: grafana/grafana:10.0.0
         resources:
           requests:
             memory: "256Mi"
@@ -75,11 +96,18 @@ kind: Deployment
 metadata:
   name: prometheus
 spec:
+  selector:
+    matchLabels:
+      app: prometheus
   replicas: 1
   template:
+    metadata:
+      labels:
+        app: prometheus
     spec:
       containers:
       - name: prometheus
+        image: prom/prometheus:v2.45.0
         resources:
           requests:
             memory: "512Mi"
