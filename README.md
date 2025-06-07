@@ -66,6 +66,28 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 
 # Extra
 
+## How to update code
+
+Go to code repository and build and push to dockerhub
+
+1. build with tag
+
+```shell
+docker build -t <dockerhub_username>/<repository_name>:<GENTERATED_TAG> .
+```
+
+2. push with tag
+
+```shell
+docker push <dockerhub_username>/<repository_name>:<GENTERATED_TAG>
+```
+
+3. Change .yaml files to image tag
+
+k8s/base/django/xxxx-deployment.yaml file of containers `image:` should be change
+
+4. Go to argocd web and sync or wait
+
 ## How to now Pod info
 
 ```bash
