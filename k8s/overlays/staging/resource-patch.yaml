@@ -66,6 +66,16 @@ spec:
           limits:
             memory: "2Gi"
             cpu: "1000m"
+      volumes:
+      - name: media
+        persistentVolumeClaim:
+          claimName: staging-django-media-pvc
+      - name: static
+        persistentVolumeClaim:
+          claimName: staging-django-static-pvc
+      - name: google-service-account
+        secret:
+          secretName: google-service-account
 ---
 apiVersion: apps/v1
 kind: Deployment

@@ -15,6 +15,16 @@ spec:
           limits:
             memory: "2Gi"
             cpu: "2000m"
+      volumes:
+      - name: media
+        persistentVolumeClaim:
+          claimName: prod-django-media-pvc
+      - name: static
+        persistentVolumeClaim:
+          claimName: prod-django-static-pvc
+      - name: google-service-account
+        secret:
+          secretName: google-service-account
   replicas: 3
 ---
 apiVersion: apps/v1
