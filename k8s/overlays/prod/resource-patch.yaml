@@ -10,11 +10,11 @@ spec:
         image: beany258/django:1.0.22
         resources:
           requests:
+            memory: "512Mi"
+            cpu: "400m"
+          limits:
             memory: "1Gi"
             cpu: "800m"
-          limits:
-            memory: "2Gi"
-            cpu: "1600m"
         envFrom:
         - configMapRef:
             name: prod-django-config
@@ -42,7 +42,7 @@ spec:
       - name: google-service-account
         secret:
           secretName: google-service-account
-  replicas: 3
+  replicas: 2
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -139,7 +139,7 @@ spec:
   selector:
     matchLabels:
       app: elasticsearch
-  replicas: 3
+  replicas: 2
   template:
     metadata:
       labels:
@@ -150,11 +150,11 @@ spec:
         image: elasticsearch:8.8.0
         resources:
           requests:
+            memory: "1Gi"
+            cpu: "500m"
+          limits:
             memory: "2Gi"
             cpu: "1000m"
-          limits:
-            memory: "4Gi"
-            cpu: "2000m"
 ---
 apiVersion: apps/v1
 kind: Deployment
