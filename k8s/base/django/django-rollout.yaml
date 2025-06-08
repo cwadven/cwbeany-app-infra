@@ -37,9 +37,9 @@ spec:
             name: django-secret
         volumeMounts:
         - name: media
-          mountPath: /usr/share/nginx/html/media
+          mountPath: /app/media
         - name: static
-          mountPath: /usr/share/nginx/html/static
+          mountPath: /app/static
         - name: google-service-account
           mountPath: /app/secrets
           readOnly: true

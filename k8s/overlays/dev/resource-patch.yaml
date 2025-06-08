@@ -67,6 +67,13 @@ spec:
           limits:
             memory: "256Mi"
             cpu: "200m"
+      volumes:
+      - name: static
+        persistentVolumeClaim:
+          claimName: dev-django-static-pvc
+      - name: media
+        persistentVolumeClaim:
+          claimName: dev-django-media-pvc
 ---
 apiVersion: apps/v1
 kind: Deployment

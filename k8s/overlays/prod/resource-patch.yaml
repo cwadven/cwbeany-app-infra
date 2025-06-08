@@ -56,6 +56,13 @@ spec:
           limits:
             memory: "1Gi"
             cpu: "800m"
+      volumes:
+      - name: static
+        persistentVolumeClaim:
+          claimName: prod-django-static-pvc
+      - name: media
+        persistentVolumeClaim:
+          claimName: prod-django-media-pvc
 ---
 apiVersion: apps/v1
 kind: Deployment
