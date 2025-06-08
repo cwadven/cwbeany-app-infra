@@ -49,7 +49,7 @@ kind: Deployment
 metadata:
   name: celery
 spec:
-  replicas: 2
+  replicas: 1
   template:
     spec:
       containers:
@@ -139,7 +139,7 @@ spec:
   selector:
     matchLabels:
       app: elasticsearch
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
@@ -164,7 +164,7 @@ spec:
   selector:
     matchLabels:
       app: grafana
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
@@ -189,7 +189,7 @@ spec:
   selector:
     matchLabels:
       app: prometheus
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
