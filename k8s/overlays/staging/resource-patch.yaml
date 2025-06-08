@@ -20,13 +20,6 @@ spec:
             name: staging-django-config
         - secretRef:
             name: django-secret
-        command: ["/bin/sh", "-c"]
-        args:
-          - |
-            cd /app
-            python manage.py collectstatic --noinput
-            python manage.py migrate --noinput
-            gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers $GUNICORN_WORKERS --timeout $GUNICORN_TIMEOUT --log-level debug
       volumes:
       - name: media
         persistentVolumeClaim:
@@ -175,3 +168,57 @@ spec:
             cpu: "400m"
         ports:
         - containerPort: 6379 
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: celery
+spec:
+  template:
+    spec:
+      containers:
+      - name: celery
+        image: beany258/django:1.0.21
+        resources:
+          requests:
+            memory: "768Mi"
+            cpu: "400m"
+          limits:
+            memory: "1.5Gi"
+            cpu: "800m"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: celery-beat
+spec:
+  template:
+    spec:
+      containers:
+      - name: celery-beat
+        image: beany258/django:1.0.21
+        resources:
+          requests:
+            memory: "384Mi"
+            cpu: "200m"
+          limits:
+            memory: "768Mi"
+            cpu: "400m"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django-cron
+spec:
+  template:
+    spec:
+      containers:
+      - name: django-cron
+        image: beany258/django:1.0.21
+        resources:
+          requests:
+            memory: "384Mi"
+            cpu: "200m"
+          limits:
+            memory: "768Mi"
+            cpu: "400m"
