@@ -39,6 +39,9 @@ spec:
       - name: static
         persistentVolumeClaim:
           claimName: staging-django-static-pvc
+      - name: google-service-account
+        secret:
+          secretName: google-service-account
   replicas: 2
 ---
 apiVersion: apps/v1
