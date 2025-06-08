@@ -85,13 +85,13 @@ kubectl apply -k k8s/base
 ## How to now Pod info
 
 ```bash
-kubectl get pods -n cwbeany -l app=django
+kubectl get pods -n cwbeany-{dev,staging,prod} -l app=django
 ```
 
 ## Get inside to pod
 
 ```bash
-kubectl exec -it django-cron-66f79cd876-69tgs -n cwbeany -- bash
+kubectl exec -it django-cron-66f79cd876-69tgs -n cwbeany-{dev,staging,prod} -- bash
 ```
 
 ## Grafana Login
