@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
       - name: django
-        image: beany258/django:1.0.21
+        image: beany258/django:1.0.22
         resources:
           requests:
             memory: "1Gi"
@@ -43,6 +43,61 @@ spec:
         secret:
           secretName: google-service-account
   replicas: 3
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: celery
+spec:
+  replicas: 2
+  template:
+    spec:
+      containers:
+      - name: celery
+        image: beany258/django:1.0.22
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu: "800m"
+          limits:
+            memory: "2Gi"
+            cpu: "1600m"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: celery-beat
+spec:
+  template:
+    spec:
+      containers:
+      - name: celery-beat
+        image: beany258/django:1.0.22
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "400m"
+          limits:
+            memory: "1Gi"
+            cpu: "800m"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django-cron
+spec:
+  template:
+    spec:
+      containers:
+      - name: django-cron
+        image: beany258/django:1.0.22
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "400m"
+          limits:
+            memory: "1Gi"
+            cpu: "800m" 
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -177,58 +232,3 @@ spec:
             cpu: "800m"
         ports:
         - containerPort: 6379
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: celery
-spec:
-  replicas: 2
-  template:
-    spec:
-      containers:
-      - name: celery
-        image: beany258/django:1.0.21
-        resources:
-          requests:
-            memory: "1Gi"
-            cpu: "800m"
-          limits:
-            memory: "2Gi"
-            cpu: "1600m"
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: celery-beat
-spec:
-  template:
-    spec:
-      containers:
-      - name: celery-beat
-        image: beany258/django:1.0.21
-        resources:
-          requests:
-            memory: "512Mi"
-            cpu: "400m"
-          limits:
-            memory: "1Gi"
-            cpu: "800m"
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: django-cron
-spec:
-  template:
-    spec:
-      containers:
-      - name: django-cron
-        image: beany258/django:1.0.21
-        resources:
-          requests:
-            memory: "512Mi"
-            cpu: "400m"
-          limits:
-            memory: "1Gi"
-            cpu: "800m" 
