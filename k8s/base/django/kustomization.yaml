@@ -7,7 +7,6 @@ resources:
   - celery-deployment.yaml
   - celery-beat-deployment.yaml
   - service.yaml
-  - ingress.yaml
   - configmap.yaml
   - pvc.yaml
   - static-pvc.yaml
