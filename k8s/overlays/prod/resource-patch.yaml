@@ -20,6 +20,14 @@ spec:
             name: prod-django-config
         - secretRef:
             name: django-secret
+        volumeMounts:
+        - name: media
+          mountPath: /app/media
+        - name: static
+          mountPath: /app/static
+        - name: google-service-account
+          mountPath: /app/secrets
+          readOnly: true
         lifecycle:
           postStart:
             exec:
