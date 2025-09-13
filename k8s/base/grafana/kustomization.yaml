@@ -11,6 +11,8 @@ resources:
 
 configMapGenerator:
   - name: grafana-dashboards
+    options:
+      disableNameSuffixHash: true
     files:
       - dashboard-json/mysql-overview.json
       - dashboard-json/redis-overview.json 
