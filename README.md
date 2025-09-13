@@ -33,6 +33,8 @@ kubectl apply -k k8s/overlays/{dev,staging,prod} -n cwbeany-{dev,staging,prod}
 
 ```bash
 kubectl apply -n ingress-nginx -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/cloud/deploy.yaml
+
+kubectl apply -f k8s/apps/ingress/ingress-nginx.yaml -n argocd
 ```
 
 ```bash
