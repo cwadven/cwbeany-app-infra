@@ -19,6 +19,7 @@ patches:
   - path: resource-patch.yaml
   - path: nginx-config-patch.yaml
   - path: grafana-datasource-patch.yaml
+  - path: redis-exporter-patch.yaml
 
 configMapGenerator:
   - name: django-config

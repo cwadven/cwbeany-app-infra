@@ -18,6 +18,7 @@ resources:
 patches:
   - path: resource-patch.yaml
   - path: nginx-config-patch.yaml
+  - path: redis-exporter-patch.yaml
   - path: grafana-datasource-patch.yaml
 
 configMapGenerator:
