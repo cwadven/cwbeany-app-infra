@@ -73,6 +73,10 @@ docker push <dockerhub_username>/<repository_name>:<GENTERATED_TAG>
 
 k8s/base/django/xxxx-deployment.yaml file of containers `image:` should be change
 
+or
+
+k8s/overlays/xxx/resource-patch containers `image:` should be change
+
 4. Go to argocd web and sync or wait
 
 ## How to reapply kubectl
