@@ -29,6 +29,20 @@ kubectl apply -n argo-rollouts -f https://github.com/argoproj/argo-rollouts/rele
 kubectl apply -k k8s/overlays/{dev,staging,prod} -n cwbeany-{dev,staging,prod}
 ```
 
+## 4.1 Set ingress-nginx to set with https
+
+```bash
+kubectl apply -n ingress-nginx -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/cloud/deploy.yaml
+```
+
+```bash
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/latest/download/cert-manager.yaml
+```
+
+```bash
+kubectl apply -f k8s/cert-manager/clusterissuers.yaml
+```
+
 ## 5. Set secrets
 
 You have to create xxx-secret.yaml file in each overlays/{dev,staging,prod}/secret
